@@ -1,10 +1,26 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <main-header v-if="!registerC"></main-header>
   <router-view />
+  <main-footer v-if="!registerC"></main-footer>
 </template>
+
+<script>
+import MainFooter from "./components/layout/MainFooter.vue";
+import MainHeader from "./components/layout/MainHeader.vue";
+export default {
+  components: { MainHeader, MainFooter },
+  data() {
+    return {
+      registers: ["register"],
+    };
+  },
+  computed: {
+    registerC() {
+      return this.registers.includes(this.$route.name);
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
@@ -16,8 +32,6 @@
 }
 
 nav {
-  padding: 30px;
-
   a {
     font-weight: bold;
     color: #2c3e50;
